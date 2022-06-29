@@ -13,4 +13,7 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('home');
 
+    $router->resource('/config', 'SiteConfigurationController');
+    $router->resource('/file', 'FileController');
+    $router->resource('/project', 'ProjectController');
 });
