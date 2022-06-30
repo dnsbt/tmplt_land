@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClientMessage;
 use App\Models\File;
 use App\Models\Project;
 use App\Models\SiteConfiguration;
+use App\Requests\ClientMessageRequest;
 use App\Services\FileService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
 class PageController extends Controller
@@ -27,7 +30,7 @@ class PageController extends Controller
     {
         $siteConfig = SiteConfiguration::all();
         $config = $siteConfig->pluck('value', 'key')->toArray();
-        $action = route('email');
+        $action = route('message');
         $projects = [];
 
         foreach (Project::all()->toArray() as $key => $project) {
@@ -47,5 +50,17 @@ class PageController extends Controller
             'action' => $action,
             'file' => $file
         ]));
+    }
+
+    public function message(ClientMessageRequest $request): RedirectResponse
+    {
+        $message = new ClientMessage();
+        $message->name = $request->get('name');
+        $message->email = $request->get('email');
+        $message->phone = $request->get('phone');
+        $message->message = $request->get('message');
+        $message->save();
+
+        return redirect()->back();
     }
 }
