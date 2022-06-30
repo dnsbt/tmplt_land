@@ -135,7 +135,7 @@ class ProjectController extends Controller
     {
         $form = new Form(new Project);
 
-        $form->display('ID');
+        $form->display('id');
         $form->text('title', 'title');
         $form->text('description', 'description');
         $form->text('category', 'category');
