@@ -16,4 +16,5 @@ Route::group([
     $router->resource('/config', 'SiteConfigurationController');
     $router->resource('/file', 'FileController');
     $router->resource('/project', 'ProjectController');
+    $router->resource('/client_message', 'ClientMessageController');
 });
